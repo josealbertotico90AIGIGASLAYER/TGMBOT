@@ -28,12 +28,12 @@ app.post('/webhook', async (req, res) => {
             let phone_number = msg.from;
             let msg_text = msg.text.body;
 
-            // ESTA ES LA LÍNEA QUE TENÍA EL ERROR (Ya corregida con backticks )
-            console.log(Mensaje recibido de ${phone_number}: ${msg_text});
+            // ESTA ES LA LÍNEA QUE TENÍA EL ERROR (Ya corregida con backticks `)
+            console.log(`Mensaje recibido de ${phone_number}: ${msg_text}`);
 
             const vfResponse = await axios({
                 method: 'POST',
-                url: https://general-runtime.voiceflow.com/state/user/${phone_number}/interact,
+                url: `https://general-runtime.voiceflow.com/state/user/${phone_number}/interact`,
                 headers: { 
                     'Authorization': VF_API_KEY,
                     'accept': 'application/json',
@@ -46,9 +46,9 @@ app.post('/webhook', async (req, res) => {
                 if (trace.type === 'text') {
                     await axios({
                         method: 'POST',
-                        url: https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages,
+                        url: `https://graph.facebook.com/v18.0/${PHONE_NUMBER_ID}/messages`,
                         headers: { 
-                            'Authorization': Bearer ${META_TOKEN},
+                            'Authorization': `Bearer ${META_TOKEN}`,
                             'Content-Type': 'application/json'
                         },
                         data: {
@@ -68,4 +68,4 @@ app.post('/webhook', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(Servidor activo en puerto ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor activo en puerto ${PORT}`));
